@@ -5,10 +5,9 @@ import de.filmempfehlung.backend.models.Movie;
 import de.filmempfehlung.backend.models.OpenAiMovie;
 import de.filmempfehlung.backend.models.themoviedb.MovieDetail;
 import de.filmempfehlung.backend.repositories.MovieRepository;
-import de.filmempfehlung.backend.services.abstracts.IdService;
-import de.filmempfehlung.backend.services.abstracts.MovieService;
-import de.filmempfehlung.backend.services.abstracts.OpenAiService;
-import de.filmempfehlung.backend.services.abstracts.TheMovieDbService;
+import de.filmempfehlung.backend.services.abstracts.*;
+import de.filmempfehlung.backend.services.dtos.requests.MovieQueryRequest;
+import de.filmempfehlung.backend.services.dtos.requests.OpenAiMovieRequest;
 import de.filmempfehlung.backend.services.dtos.responses.MovieCreatedResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,10 +24,11 @@ public class MovieManager implements MovieService {
     private final ModelMapperService modelMapperService;
     private final OpenAiService openAiService;
     private final TheMovieDbService theMovieDbService;
+    private final MovieQueryService movieQueryService;
 
     @Override
-    public List<MovieCreatedResponse> generateAndSaveMovieList(String genrePreference) {
-        List<OpenAiMovie> generatedMovies = openAiService.getMovies(genrePreference);
+    public List<MovieCreatedResponse> generateAndSaveMovieList(OpenAiMovieRequest openAiMovieRequest) {
+        List<OpenAiMovie> generatedMovies = openAiService.getMovies(openAiMovieRequest);
         List<Movie> movies = new ArrayList<>();
         for (OpenAiMovie openAiMovie : generatedMovies){
             Movie movie = modelMapperService.forRequest().map(openAiMovie, Movie.class);
@@ -40,6 +40,7 @@ public class MovieManager implements MovieService {
             movie = movieRepository.save(movie);
             movies.add(movie);
         }
+        movieQueryService.addRequestQuery(MovieQueryRequest.builder().openAiMovieRequest(openAiMovieRequest).movies(movies).build());
         return movies.stream().map(movie -> modelMapperService.forResponse().map(movie, MovieCreatedResponse.class)).toList();
     }
 }

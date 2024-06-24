@@ -11,4 +11,9 @@ public class IdManager implements IdService {
     public String generateMovieId() {
         return "MOV-" + UUID.randomUUID();
     }
+
+    @Override
+    public String generateQueryId() {
+        return "QUE-" + UUID.randomUUID();
+    }
 }
