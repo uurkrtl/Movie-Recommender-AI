@@ -34,7 +34,7 @@ public class MovieManager implements MovieService {
             Movie movie = modelMapperService.forRequest().map(openAiMovie, Movie.class);
             MovieDetail movieDetail = theMovieDbService.getMovieDetail(movie.getThemoviedbId());
             movie.setOverview(movieDetail.getOverview());
-            movie.setPosterPath(movieDetail.getPoster_path());
+            movie.setPosterPath(movieDetail.getPosterPath());
             movie.setId(idService.generateMovieId());
             movie.setCreatedAt(LocalDateTime.now());
             movie = movieRepository.save(movie);
