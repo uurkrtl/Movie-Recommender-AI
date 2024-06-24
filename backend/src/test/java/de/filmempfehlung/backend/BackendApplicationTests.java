@@ -6,6 +6,7 @@ import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest
 @TestPropertySource(properties = {"spring.ai.openai.api-key=dummy-key"})
+@TestPropertySource(properties = {"themoviedb.api-key=dummy-key"})
 class BackendApplicationTests {
 
     @Test
