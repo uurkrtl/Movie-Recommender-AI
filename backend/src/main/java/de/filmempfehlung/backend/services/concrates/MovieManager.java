@@ -9,6 +9,7 @@ import de.filmempfehlung.backend.services.abstracts.*;
 import de.filmempfehlung.backend.services.dtos.requests.MovieQueryRequest;
 import de.filmempfehlung.backend.services.dtos.requests.OpenAiMovieRequest;
 import de.filmempfehlung.backend.services.dtos.responses.MovieCreatedResponse;
+import de.filmempfehlung.backend.services.rules.MovieBusinessRule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ import java.util.List;
 public class MovieManager implements MovieService {
     private final MovieRepository movieRepository;
     private final IdService idService;
+    private final MovieBusinessRule movieBusinessRule;
     private final ModelMapperService modelMapperService;
     private final OpenAiService openAiService;
     private final TheMovieDbService theMovieDbService;
@@ -35,9 +37,15 @@ public class MovieManager implements MovieService {
             MovieDetail movieDetail = theMovieDbService.getMovieDetail(movie.getThemoviedbId());
             movie.setOverview(movieDetail.getOverview());
             movie.setPosterPath(movieDetail.getPosterPath());
-            movie.setId(idService.generateMovieId());
-            movie.setCreatedAt(LocalDateTime.now());
-            movie = movieRepository.save(movie);
+
+            if (movieBusinessRule.checkIfThemoviedbIdExists(movie.getThemoviedbId()) != null){
+                movie.setId(movieBusinessRule.checkIfThemoviedbIdExists(movie.getThemoviedbId()));
+                movie.setUpdatedAt(LocalDateTime.now());
+            } else {
+                movie.setId(idService.generateMovieId());
+                movie.setCreatedAt(LocalDateTime.now());
+            }
+            movieRepository.save(movie);
             movies.add(movie);
         }
         movieQueryService.addRequestQuery(MovieQueryRequest.builder().openAiMovieRequest(openAiMovieRequest).movies(movies).build());
