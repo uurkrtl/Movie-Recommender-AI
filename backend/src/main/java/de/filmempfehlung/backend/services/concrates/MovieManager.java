@@ -8,9 +8,12 @@ import de.filmempfehlung.backend.repositories.MovieRepository;
 import de.filmempfehlung.backend.services.abstracts.*;
 import de.filmempfehlung.backend.services.dtos.requests.MovieQueryRequest;
 import de.filmempfehlung.backend.services.dtos.requests.OpenAiMovieRequest;
+import de.filmempfehlung.backend.services.dtos.responses.MovieCreatedResponse;
+import de.filmempfehlung.backend.services.messages.MovieMessage;
 import de.filmempfehlung.backend.services.rules.MovieBusinessRule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -48,5 +51,11 @@ public class MovieManager implements MovieService {
             movies.add(movie);
         }
         return movieQueryService.addRequestQuery(MovieQueryRequest.builder().openAiMovieRequest(openAiMovieRequest).movies(movies).build());
+    }
+
+    @Override
+    public MovieCreatedResponse getMovieByMovieId(String id) {
+        Movie movie = movieRepository.findById(id).orElseThrow(() -> new NotFoundException(MovieMessage.MOVIE_NOT_FOUND));
+        return modelMapperService.forResponse().map(movie, MovieCreatedResponse.class);
     }
 }
