@@ -57,8 +57,7 @@ function MovieList() {
                                             <div
                                                 className="mb-1 text-body-secondary">{movie.releaseYear} | {movie.imdbRating}</div>
                                             <p className="card-text mb-auto">{truncateText(movie.overview, 210)}</p>
-                                            <Link to={`/movie-detail/${movie.id}`} className="icon-link gap-1 icon-link-hover stretched-link">
-
+                                            <Link to={`/movie-detail/${movie.id}/${queryId}`} className="icon-link gap-1 icon-link-hover stretched-link">
                                                 Detail
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                      fill="currentColor" className="bi bi-chevron-double-right"
