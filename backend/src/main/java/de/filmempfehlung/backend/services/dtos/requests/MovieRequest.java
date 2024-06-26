@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MovieRequest {
     private String movieName;
+    private String movieNameGerman;
     private double imdbRating;
     private String headliner;
     private int releaseYear;

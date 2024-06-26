@@ -21,7 +21,6 @@ public class OpenAiManager implements OpenAiService {
     @Override
     public List<OpenAiMovie> getMovies(OpenAiMovieRequest openAiMovieRequest) {
         StringBuilder requestQuery = new StringBuilder();
-        requestQuery.append("Can you recommend max. 3 movies?");
         if (!openAiMovieRequest.getGenre().isEmpty()) requestQuery.append(" Genre: ").append(openAiMovieRequest.getGenre());
         if (!openAiMovieRequest.getActorDirector().isEmpty()) requestQuery.append(" Favorite Actor or Director: ").append(openAiMovieRequest.getActorDirector());
         if (!openAiMovieRequest.getMoodTheme().isEmpty()) requestQuery.append(" Mood or theme: ").append(openAiMovieRequest.getMoodTheme());
@@ -29,7 +28,7 @@ public class OpenAiManager implements OpenAiService {
         if (!Objects.equals(openAiMovieRequest.getSpecialInterest(), "")) requestQuery.append(" Special interest: ").append(openAiMovieRequest.getSpecialInterest());
 
         return chatClient.prompt()
-                .user(u -> u.text("Can you recommend max. 3 movies? {requestQuery}").param("requestQuery", requestQuery.toString()))
+                .user(u -> u.text("Can you recommend 3 movies? {requestQuery}").param("requestQuery", requestQuery.toString()))
                 .call()
                 .entity(new ParameterizedTypeReference<>() {});
     }

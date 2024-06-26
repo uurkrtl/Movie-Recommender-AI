@@ -8,7 +8,6 @@ import de.filmempfehlung.backend.repositories.MovieRepository;
 import de.filmempfehlung.backend.services.abstracts.*;
 import de.filmempfehlung.backend.services.dtos.requests.MovieQueryRequest;
 import de.filmempfehlung.backend.services.dtos.requests.OpenAiMovieRequest;
-import de.filmempfehlung.backend.services.dtos.responses.MovieCreatedResponse;
 import de.filmempfehlung.backend.services.rules.MovieBusinessRule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,7 +28,7 @@ public class MovieManager implements MovieService {
     private final MovieQueryService movieQueryService;
 
     @Override
-    public List<MovieCreatedResponse> generateAndSaveMovieList(OpenAiMovieRequest openAiMovieRequest) {
+    public String  generateAndSaveMovieList(OpenAiMovieRequest openAiMovieRequest) {
         List<OpenAiMovie> generatedMovies = openAiService.getMovies(openAiMovieRequest);
         List<Movie> movies = new ArrayList<>();
         for (OpenAiMovie openAiMovie : generatedMovies){
@@ -48,7 +47,6 @@ public class MovieManager implements MovieService {
             movieRepository.save(movie);
             movies.add(movie);
         }
-        movieQueryService.addRequestQuery(MovieQueryRequest.builder().openAiMovieRequest(openAiMovieRequest).movies(movies).build());
-        return movies.stream().map(movie -> modelMapperService.forResponse().map(movie, MovieCreatedResponse.class)).toList();
+        return movieQueryService.addRequestQuery(MovieQueryRequest.builder().openAiMovieRequest(openAiMovieRequest).movies(movies).build());
     }
 }

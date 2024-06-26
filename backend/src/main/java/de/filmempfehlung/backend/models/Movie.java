@@ -16,6 +16,7 @@ public class Movie {
     @Id
     private String id;
     private String movieName;
+    private String movieNameGerman;
     private double imdbRating;
     private String headliner;
     private int releaseYear;
