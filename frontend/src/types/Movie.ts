@@ -1,6 +1,7 @@
 export type Movie = {
     id: string,
     movieName: string,
+    movieNameGerman: string,
     imdbRating: number,
     headliner: string,
     releaseYear: number,
