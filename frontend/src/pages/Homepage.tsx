@@ -45,7 +45,7 @@ function Homepage() {
     return (
         <main className={'container'}>
                 <div className="py-5 text-center">
-                    <img className="d-block mx-auto mb-2" src="../../public/logo.png" alt="" width="100" height="100"/>
+                    <img className="d-block mx-auto mb-2" src="https://i.ibb.co/PZTxpLB/logo-navbar.png" alt="" width="100" height="100"/>
                     <h2>Filmempfehlungen</h2>
                     <p>
                         Nenne mir deine Vorlieben, und ich werde dir Filme empfehlen.
