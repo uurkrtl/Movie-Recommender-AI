@@ -7,7 +7,7 @@ function Footer() {
             <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
                 <div className="col-md-4 d-flex align-items-center">
                     <Link to={`/`} className="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                        <img src="../../public/logo_navbar.png" alt="" width="32"
+                        <img src="https://i.ibb.co/PZTxpLB/logo-navbar.png" alt="" width="32"
                              height="32" style={{marginRight: '10px'}}/>
                     </Link>
                     <Link to={`http://ugurkartal.de/`} target="_blank"

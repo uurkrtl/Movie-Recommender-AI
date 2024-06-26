@@ -7,7 +7,7 @@ function Navbar() {
                 <div className="container-fluid">
                     <div className="mx-1">
                         <Link to={'/'} className="text-decoration-none">
-                            <img src="../../public/logo_navbar.png" alt="" width="32"
+                            <img src="https://i.ibb.co/PZTxpLB/logo-navbar.png" alt="" width="32"
                                  height="32" style={{marginRight: '10px'}}/>
                         </Link>
                     </div>
