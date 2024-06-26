@@ -28,7 +28,7 @@ public class OpenAiManager implements OpenAiService {
         if (!Objects.equals(openAiMovieRequest.getSpecialInterest(), "")) requestQuery.append(" Special interest: ").append(openAiMovieRequest.getSpecialInterest());
 
         return chatClient.prompt()
-                .user(u -> u.text("Can you recommend 3 movies? {requestQuery}").param("requestQuery", requestQuery.toString()))
+                .user(u -> u.text("Can you recommend max. 5 movies? {requestQuery}").param("requestQuery", requestQuery.toString()))
                 .call()
                 .entity(new ParameterizedTypeReference<>() {});
     }
