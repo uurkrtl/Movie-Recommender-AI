@@ -61,7 +61,7 @@ function Homepage() {
                                 <div className="col-sm-3">
                                     <div className="input-group">
                                         <span className="input-group-text" id="inputGroup-sizing-default">Genre</span>
-                                        <select className="form-select" id="state" defaultValue="Action"
+                                        <select className="form-select" id="genre" defaultValue="Action"
                                                 onChange={(e) => setOpenAiMovieRequest(
                                                     {...openAiMovieRequest, genre: e.target.value})}>
                                             {genres.map((genre) => {
@@ -86,7 +86,7 @@ function Homepage() {
                                 <div className="col-sm-4">
                                     <div className="input-group">
                                         <span className="input-group-text"
-                                              id="inputGroup-sizing-default">Stimmungsthema</span>
+                                              id="inputGroup-sizing-default">Stimmung</span>
                                         <input type="text" className="form-control" id="moodTheme" value={openAiMovieRequest.moodTheme}
                                                onChange={(e) => setOpenAiMovieRequest(
                                                    {...openAiMovieRequest, moodTheme: e.target.value})}/>
@@ -96,7 +96,7 @@ function Homepage() {
                                 <div className="col-sm-3">
                                     <div className="input-group">
                                         <span className="input-group-text"
-                                              id="inputGroup-sizing-default">Mindestbewertungspunktzahl</span>
+                                              id="inputGroup-sizing-default">Mindestbewertung</span>
                                         <input type="number" step="0.1" className="form-control" id="minRating"
                                                value={openAiMovieRequest.minRating}
                                                onChange={(e) => setOpenAiMovieRequest(
