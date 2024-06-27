@@ -48,7 +48,7 @@ Das Projekt ist mit Docker containerisiert und wird mit einer CI/CD-Pipeline üb
 
 - **Backend:** Java 21, Spring Boot 3, Spring AI 1.0.0-M1
 - **Frontend:** React 18, Typescript 5, Bootstrap 5
-- **APIs:** OpenAI, The Movie DB API
+- **APIs:** OpenAI GPT-4o, The Movie DB API
 - **Database** MongoDB Atlas
 
 ## Datenschutzrichtlinie
@@ -64,7 +64,7 @@ Das Projekt ist mit Docker containerisiert und wird mit einer CI/CD-Pipeline üb
 
 ## Kontakt
 
-Für Fragen senden Sie bitte eine E-Mail an [ugur at ugurkartal.de](mailto:info@ugurkartal.de).
+Für Fragen senden Sie bitte eine E-Mail an [info at ugurkartal.de](mailto:info@ugurkartal.de).
 
 ## Beitrag
 
