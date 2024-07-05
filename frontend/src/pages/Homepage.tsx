@@ -76,7 +76,7 @@ function Homepage() {
 
                                 <div className="col-sm-5">
                                     <div className="input-group">
-                                        <span className="input-group-text" id="inputGroup-sizing-default">Schauspieler oder Regisseur</span>
+                                        <span className="input-group-text" id="inputGroup-sizing-default">Schauspieler</span>
                                         <input type="text" className="form-control" id="actorDirector" value={openAiMovieRequest.actorDirector}
                                         onChange={(e) => setOpenAiMovieRequest(
                                             {...openAiMovieRequest, actorDirector: e.target.value})}/>
